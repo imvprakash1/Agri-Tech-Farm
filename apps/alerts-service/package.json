@@ -12,7 +12,8 @@
     "test": "bun test"
   },
   "dependencies": {
-    "@repo/types": "workspace:*"
+    "@repo/types": "workspace:*",
+    "mqtt": "^5.15.1"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
