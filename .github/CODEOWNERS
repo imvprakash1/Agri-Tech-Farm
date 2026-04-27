@@ -1,0 +1,16 @@
+# Technology & Automation (CTO) [cite: 603, 698]
+/apps/iot-gateway/          @tech-dept-head
+/packages/types/            @tech-dept-head
+/turbo.json                 @tech-dept-head
+
+# Agronomy & Ecosystem Operations (COO) [cite: 608, 699]
+/apps/alerts-service/       @agronomy-dept-head
+/docs/master-plan.md        @agronomy-dept-head
+
+# Post-Harvest, Sales & Logistics (CRO) [cite: 614, 700]
+/apps/web-dashboard/        @sales-dept-head
+/docs/financials.md         @sales-dept-head
+
+# Finance, Legal & Compliance (CEO/CFO) [cite: 619, 701]
+/docs/business-setup.md     @finance-dept-head
+/package.json               @finance-dept-head
