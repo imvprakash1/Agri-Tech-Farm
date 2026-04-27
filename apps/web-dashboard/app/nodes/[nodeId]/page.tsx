@@ -12,22 +12,9 @@ import {
   ALL_NODES,
   NODE_LABELS,
   NODE_DESCRIPTIONS,
-  NODE_TIMEOUT_MS,
 } from "@/app/lib/constants";
+import { timeAgo, getNodeStatus, parseViolationKey } from "@/app/lib/utils";
 import type { AlertsStatusResponse, AutomationStatusResponse } from "@/app/lib/types";
-
-function timeAgo(ms: number | null): string {
-  if (ms === null) return "Never connected";
-  const sec = Math.round((Date.now() - ms) / 1000);
-  if (sec < 60) return `${sec}s ago`;
-  if (sec < 3600) return `${Math.floor(sec / 60)}m ago`;
-  return `${Math.floor(sec / 3600)}h ago`;
-}
-
-function getStatus(lastSeen: number | null): "online" | "offline" | "unknown" {
-  if (lastSeen === null) return "unknown";
-  return Date.now() - lastSeen < NODE_TIMEOUT_MS ? "online" : "offline";
-}
 
 export default function NodeDetailPage({
   params,
@@ -52,7 +39,7 @@ export default function NodeDetailPage({
 
   const nodeStatus = alerts?.nodes[id];
   const lastSeen = nodeStatus?.lastSeen ?? null;
-  const status = getStatus(lastSeen);
+  const status = getNodeStatus(lastSeen);
 
   const violations = alerts?.activeViolations
     ? Object.entries(alerts.activeViolations).filter(([key]) => key.startsWith(`${id}:`))
@@ -85,7 +72,7 @@ export default function NodeDetailPage({
             Active Violations ({violations.length})
           </h3>
           {violations.map(([key, since]) => {
-            const sensor = key.split(":")[1];
+            const { sensor } = parseViolationKey(key);
             return (
               <div key={key} className="flex items-center justify-between text-xs">
                 <span className="font-medium">{sensor}</span>

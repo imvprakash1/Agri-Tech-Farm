@@ -1,20 +1,7 @@
 import Link from "next/link";
 import type { NodeId } from "@repo/types";
 import { StatusIndicator } from "./StatusIndicator";
-import { NODE_TIMEOUT_MS } from "@/app/lib/constants";
-
-function getStatus(lastSeen: number | null): "online" | "offline" | "unknown" {
-  if (lastSeen === null) return "unknown";
-  return Date.now() - lastSeen < NODE_TIMEOUT_MS ? "online" : "offline";
-}
-
-function timeAgo(ms: number | null): string {
-  if (ms === null) return "Never connected";
-  const sec = Math.round((Date.now() - ms) / 1000);
-  if (sec < 60) return `${sec}s ago`;
-  if (sec < 3600) return `${Math.floor(sec / 60)}m ago`;
-  return `${Math.floor(sec / 3600)}h ago`;
-}
+import { timeAgo, getNodeStatus } from "@/app/lib/utils";
 
 export function NodeCard({
   nodeId,
@@ -27,7 +14,7 @@ export function NodeCard({
   description: string;
   lastSeen: number | null;
 }) {
-  const status = getStatus(lastSeen);
+  const status = getNodeStatus(lastSeen);
 
   return (
     <Link

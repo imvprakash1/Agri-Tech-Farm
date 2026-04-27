@@ -1,22 +1,9 @@
 "use client";
 
 import { usePolling } from "@/app/hooks/use-polling";
-import { POLLING_INTERVAL_MS, NODE_LABELS } from "@/app/lib/constants";
+import { POLLING_INTERVAL_MS } from "@/app/lib/constants";
+import { timeAgo, parseViolationKey } from "@/app/lib/utils";
 import type { AlertsStatusResponse } from "@/app/lib/types";
-import type { NodeId } from "@repo/types";
-
-function parseViolationKey(key: string): { node: string; sensor: string } {
-  const [nodeId, sensor] = key.split(":");
-  const node = NODE_LABELS[nodeId as NodeId] ?? nodeId;
-  return { node, sensor: sensor ?? key };
-}
-
-function timeAgo(ms: number): string {
-  const sec = Math.round((Date.now() - ms) / 1000);
-  if (sec < 60) return `${sec}s ago`;
-  if (sec < 3600) return `${Math.floor(sec / 60)}m ago`;
-  return `${Math.floor(sec / 3600)}h ago`;
-}
 
 export function AlertBanner() {
   const { data, error, isLoading } = usePolling<AlertsStatusResponse>(
@@ -59,11 +46,11 @@ export function AlertBanner() {
         Active Violations ({violations.length})
       </h3>
       {violations.map(([key, since]) => {
-        const { node, sensor } = parseViolationKey(key);
+        const { nodeLabel, sensor } = parseViolationKey(key);
         return (
           <div key={key} className="flex items-center justify-between text-xs">
             <span>
-              <span className="text-foreground font-medium">{node}</span>
+              <span className="text-foreground font-medium">{nodeLabel}</span>
               <span className="text-text-muted"> / {sensor}</span>
             </span>
             <span className="text-text-muted font-mono">{timeAgo(since)}</span>
