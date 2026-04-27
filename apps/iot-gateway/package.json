@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@influxdata/influxdb-client": "^1.35.0",
+    "@repo/mqtt-client": "workspace:*",
     "@repo/types": "workspace:*",
     "mqtt": "^5.15.1"
   },

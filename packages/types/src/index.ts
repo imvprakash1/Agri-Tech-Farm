@@ -90,3 +90,13 @@ export const NODE_LABELS: Record<NodeId, string> = {
   node_c: "Utility & Energy Hub",
   node_d: "Dairy & Biogas Complex",
 };
+
+// ── Default Threshold Constants (from technical spec) ─────────────
+// Used as defaults by backend services (overridable via env vars)
+// and for display status logic in the dashboard.
+export const DEFAULT_THRESHOLDS = {
+  PH_LOW: 6.0,
+  PH_HIGH: 8.5,
+  CO2_HIGH: 1000,
+  CO2_LOW: 600,
+} as const;

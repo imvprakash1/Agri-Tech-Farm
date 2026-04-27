@@ -1,15 +1,11 @@
 "use client";
 
-import { usePolling } from "@/app/hooks/use-polling";
-import { POLLING_INTERVAL_MS, ALL_NODES, NODE_LABELS, NODE_DESCRIPTIONS } from "@/app/lib/constants";
-import type { AlertsStatusResponse } from "@/app/lib/types";
+import { useDashboardData } from "@/app/hooks/use-dashboard-data";
+import { ALL_NODES, NODE_LABELS, NODE_DESCRIPTIONS } from "@/app/lib/constants";
 import { NodeCard } from "./NodeCard";
 
 export function NodeGrid() {
-  const { data, error, isLoading } = usePolling<AlertsStatusResponse>(
-    "/api/alerts",
-    POLLING_INTERVAL_MS
-  );
+  const { alerts: { data, error, isLoading } } = useDashboardData();
 
   if (isLoading) {
     return (

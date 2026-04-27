@@ -1,0 +1,11 @@
+{
+  "name": "@repo/mqtt-client",
+  "version": "0.0.0",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "exports": { ".": "./src/index.ts" },
+  "scripts": { "check-types": "tsc --noEmit" },
+  "dependencies": { "mqtt": "^5.15.1" },
+  "devDependencies": { "@repo/typescript-config": "workspace:*", "@types/bun": "latest", "typescript": "^5" }
+}

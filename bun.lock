@@ -14,6 +14,7 @@
       "name": "alerts-service",
       "version": "0.0.0",
       "dependencies": {
+        "@repo/mqtt-client": "workspace:*",
         "@repo/types": "workspace:*",
         "mqtt": "^5.15.1",
       },
@@ -27,6 +28,7 @@
       "name": "automation-engine",
       "version": "0.0.0",
       "dependencies": {
+        "@repo/mqtt-client": "workspace:*",
         "@repo/types": "workspace:*",
         "mqtt": "^5.15.1",
       },
@@ -41,6 +43,7 @@
       "version": "0.0.0",
       "dependencies": {
         "@influxdata/influxdb-client": "^1.35.0",
+        "@repo/mqtt-client": "workspace:*",
         "@repo/types": "workspace:*",
         "mqtt": "^5.15.1",
       },
@@ -85,6 +88,18 @@
         "globals": "^16.5.0",
         "typescript": "^5.9.2",
         "typescript-eslint": "^8.50.0",
+      },
+    },
+    "packages/mqtt-client": {
+      "name": "@repo/mqtt-client",
+      "version": "0.0.0",
+      "dependencies": {
+        "mqtt": "^5.15.1",
+      },
+      "devDependencies": {
+        "@repo/typescript-config": "workspace:*",
+        "@types/bun": "latest",
+        "typescript": "^5",
       },
     },
     "packages/types": {
@@ -281,6 +296,8 @@
     "@nolyfill/is-core-module": ["@nolyfill/is-core-module@1.0.39", "", {}, "sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA=="],
 
     "@repo/eslint-config": ["@repo/eslint-config@workspace:packages/eslint-config"],
+
+    "@repo/mqtt-client": ["@repo/mqtt-client@workspace:packages/mqtt-client"],
 
     "@repo/types": ["@repo/types@workspace:packages/types"],
 

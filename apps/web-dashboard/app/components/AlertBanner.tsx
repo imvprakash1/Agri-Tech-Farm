@@ -1,15 +1,10 @@
 "use client";
 
-import { usePolling } from "@/app/hooks/use-polling";
-import { POLLING_INTERVAL_MS } from "@/app/lib/constants";
+import { useDashboardData } from "@/app/hooks/use-dashboard-data";
 import { timeAgo, parseViolationKey } from "@/app/lib/utils";
-import type { AlertsStatusResponse } from "@/app/lib/types";
 
 export function AlertBanner() {
-  const { data, error, isLoading } = usePolling<AlertsStatusResponse>(
-    "/api/alerts",
-    POLLING_INTERVAL_MS
-  );
+  const { alerts: { data, error, isLoading } } = useDashboardData();
 
   if (isLoading) {
     return (

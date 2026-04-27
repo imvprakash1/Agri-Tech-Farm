@@ -1,8 +1,6 @@
 "use client";
 
-import { usePolling } from "@/app/hooks/use-polling";
-import { POLLING_INTERVAL_MS } from "@/app/lib/constants";
-import type { AutomationStatusResponse } from "@/app/lib/types";
+import { useDashboardData } from "@/app/hooks/use-dashboard-data";
 import { LoopStatusBadge } from "./LoopStatusBadge";
 import { MetricDisplay } from "./MetricDisplay";
 
@@ -14,10 +12,7 @@ function formatUptime(seconds: number): string {
 }
 
 export function AutomationPanel() {
-  const { data, error, isLoading } = usePolling<AutomationStatusResponse>(
-    "/api/automation",
-    POLLING_INTERVAL_MS
-  );
+  const { automation: { data, error, isLoading } } = useDashboardData();
 
   if (isLoading) {
     return (
